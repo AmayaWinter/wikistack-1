@@ -19,7 +19,15 @@ const Page = db.define('page', {
   status: {
     type: Sequelize.ENUM('open', 'closed')
   }
-})
+});
+
+function createSlug(title) {
+  return title.replace(/[^a-z\s]/ig, '').replaceAll(' ', '_');
+}
+
+Page.addHook('beforeValidate', (instance, options) => {
+  instance.slug = createSlug(instance.title);
+});
 
 const User = db.define('user', {
   name: {
@@ -36,11 +44,6 @@ const User = db.define('user', {
   }
 })
 
-// const create = async () => {
-//   await db.sync();
-// }
-
-// create();
 
 module.exports = {
   db,

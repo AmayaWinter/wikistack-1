@@ -6,3 +6,7 @@ body {
 a {
   color: #00B7FF;
 }
+
+.wiki-form div {
+  margin-bottom:1rem;
+}
