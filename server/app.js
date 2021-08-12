@@ -19,7 +19,7 @@ app.get('/',(req, res, next) => {
 
 
 const init = async () => {
-  await db.sync({force: true});
+  await db.sync();
 
   const PORT = 8000
 

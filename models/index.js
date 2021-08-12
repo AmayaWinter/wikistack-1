@@ -22,7 +22,7 @@ const Page = db.define('page', {
 });
 
 function createSlug(title) {
-  return title.replace(/[^a-z\s]/ig, '').replaceAll(' ', '_');
+  return title.replace(/[^a-z\s]/ig, '').replace(' ', '_');
 }
 
 Page.addHook('beforeValidate', (instance, options) => {
