@@ -9,14 +9,14 @@ module.exports = () => layout(html`
       <div class="form-group">
         <label for="author_name" class="col-sm-2 control-label">Author Name</label>
         <div class="col-sm-10">
-          <input id="author_name" name="author_name" type="text" class="form-control"/>
+          <input id="author_name" name="authorName" type="text" class="form-control"/>
         </div>
       </div>
   
       <div class="form-group">
         <label for="author_email" class="col-sm-2 control-label">Author Email</label>
         <div class="col-sm-10">
-          <input id="author_email" name="author_email" type="text" class="form-control"/>
+          <input id="author_email" name="authorEmail" type="text" class="form-control"/>
         </div>
       </div>
       
@@ -35,7 +35,7 @@ module.exports = () => layout(html`
       </div>
   
       <div class="form-group">
-        <label for="status" class="col-sm-2 control-label">Content</label>
+        <label for="status" class="col-sm-2 control-label">Status</label>
         <div class="col-sm-10">
           <select id="status" name="status" class="form-control">
             <option value="open">Open</option>

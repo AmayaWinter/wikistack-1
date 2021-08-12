@@ -1,4 +1,4 @@
-const {Page} = require("../../models/index");
+const {Page, User} = require("../../models/index");
 const express = require('express');
 const pageRouter = express.Router();
 const addPage = require('./../../views/addPage');
@@ -19,12 +19,17 @@ pageRouter.get('/', async (req, res, next) => {
 
 
 pageRouter.post('/', async (req, res, next) => {
-  console.log(req.body);
+
   try {
+    const author = await User.create({
+      name : req.body.authorName,
+      email: req.body.authorEmail
+    });
     const page = await Page.create({
       title: req.body.title,
       content: req.body.content,
     });
+    page.setAuthor(author);
     // make sure we only redirect *after* our save is complete! Don't forget to `await` the previous step. `create` returns a Promise.
     res.redirect('/wiki/' + page.slug);
   }
@@ -43,9 +48,19 @@ pageRouter.get('/:slug', async (req, res, next) => {
     const page = await Page.findAll({
       where: {
         slug: req.params.slug
+      },
+      // include: {
+      //   model: User,
+      //   as: 'author'
+      // }
+    });
+    const author = await User.findAll({
+      where: {
+        id: page[0].authorId
       }
-    })
-    res.send(wikipage(page[0]));
+    });
+    // console.log(Object.getPrototypeOf(page));
+    res.send(wikipage(page[0], author[0]));
   }
   catch (error) {
     next (error)

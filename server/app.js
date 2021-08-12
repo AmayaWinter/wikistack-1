@@ -4,6 +4,7 @@ const app = express();
 const layout = require('../views/layout');
 const { db, Page, User } = require('../models');
 const pageRouter = require('./routes/wiki');
+const userRouter = require('./routes/users');
 
 
 app.use(morgan('dev'));
@@ -11,6 +12,7 @@ app.use(express.static('./public'));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use('/wiki', pageRouter);
+app.use('/users', userRouter);
 // app.use('/user', pageRouter);
 
 app.get('/',(req, res, next) => {
